@@ -1,13 +1,1 @@
-export default {
-  async fetch(request) {
-    const url = new URL(request.url);
 
-    // Si certificat → laisse passer
-    if (url.pathname.startsWith("/certificat")) {
-      return fetch(request);
-    }
-
-    // Sinon → redirection vers Vinted
-    return Response.redirect("https://www.vinted.com", 302);
-  }
-};
