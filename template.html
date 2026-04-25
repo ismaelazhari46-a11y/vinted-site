@@ -547,7 +547,9 @@
         white-space: nowrap;
         cursor: pointer;
       ">Fermer</button>
-      <button type="button" onclick="openVintedApp()" style="
+      <a href="https://apps.apple.com/be/app/vinted-shopping-seconde-main/id632064380?l=fr-FR
+
+A" target="_blank" style="
         background: #009882;
         color: white;
         font-size: 13px;
@@ -555,37 +557,49 @@
         font-family: 'DM Sans', sans-serif;
         padding: 5px 14px;
         border-radius: 20px;
-        border: none;
         text-decoration: none;
         text-align: center;
         white-space: nowrap;
-        cursor: pointer;
-      ">Télécharger</button>
+      " href="#" onclick="openVintedApp()">Télécharger</a>
     </div>
   </div>
 
 
+
+
 <script>
 function openVintedApp() {
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-  var iosStore = "https://apps.apple.com/app/id632064380";
-  var androidStore = "https://play.google.com/store/apps/details?id=com.vinted";
-  var webFallback = "https://www.vinted.fr";
+  const iosStore = "https://apps.apple.com/app/id632064380";
+  const androidStore = "https://play.google.com/store/apps/details?id=com.vinted";
+  const webFallback = "https://www.vinted.fr";
 
   if (/iPhone|iPad|iPod/i.test(ua)) {
-    window.location.href = "vinted://";
+    const start = Date.now();
+
+    const iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.src = "vinted://";
+    document.body.appendChild(iframe);
+
     setTimeout(function() {
-      window.location.href = iosStore;
-    }, 1200);
+      if (Date.now() - start < 1200) {
+        window.location.href = iosStore;
+      }
+    }, 700);
+
     return;
   }
 
   if (/Android/i.test(ua)) {
-    window.location.href = "intent://#Intent;scheme=vinted;package=com.vinted;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.vinted;end";
+    window.location.href =
+      "intent://#Intent;scheme=vinted;package=com.vinted;end";
+
     setTimeout(function() {
       window.location.href = androidStore;
-    }, 1200);
+    }, 800);
+
     return;
   }
 
