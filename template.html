@@ -560,52 +560,9 @@ A" target="_blank" style="
         text-decoration: none;
         text-align: center;
         white-space: nowrap;
-      " href="#" onclick="openVintedApp()">Télécharger</a>
+      ">Télécharger</a>
     </div>
   </div>
-
-
-
-
-<script>
-function openVintedApp() {
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
-
-  const iosStore = "https://apps.apple.com/app/id632064380";
-  const androidStore = "https://play.google.com/store/apps/details?id=fr.vinted";
-  const webFallback = "https://www.vinted.fr";
-
-  if (/iPhone|iPad|iPod/i.test(ua)) {
-    const start = Date.now();
-
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = "vinted://";
-    document.body.appendChild(iframe);
-
-    setTimeout(function() {
-      if (Date.now() - start < 1200) {
-        window.location.href = iosStore;
-      }
-    }, 700);
-
-    return;
-  }
-
-  if (/Android/i.test(ua)) {
-    window.location.href =
-      "intent://#Intent;scheme=vinted;package=com.vinted;end";
-
-    setTimeout(function() {
-      window.location.href = androidStore;
-    }, 800);
-
-    return;
-  }
-
-  window.location.href = webFallback;
-}
-</script>
 
 </body>
 </html>
